@@ -234,7 +234,7 @@ html.vt-theme::view-transition-old(root),html.vt-theme::view-transition-new(root
 .pc-hint{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:10px;font-size:.76rem;font-weight:700;color:rgba(255,255,255,.8)}
 .pc-hint .cv{margin-left:2px;transition:transform .2s}.pcard:hover .pc-hint .cv{transform:translateX(4px)}
 .pcard.fresh{animation:cardIn .8s calc(var(--b,0s) + .25s) cubic-bezier(.2,1.2,.3,1) backwards}
-.pcard.fresh .xp i{animation:xpIn 1s calc(var(--b,0s) + .3s) cubic-bezier(.2,.8,.2,1) backwards}
+.pcard.fresh .xp i{animation:xpIn 1.5s calc(var(--b,0s) + .7s) cubic-bezier(.2,.8,.2,1) backwards}
 .pcard.fresh .elt{animation:eltIn .9s calc(var(--b,0s) + .45s) cubic-bezier(.2,1.5,.3,1) backwards}
 
 /* periodic-table tile for the student's level */
@@ -283,7 +283,7 @@ html.vt-theme::view-transition-old(root),html.vt-theme::view-transition-new(root
 .t-prog{position:relative;z-index:2;display:block;height:6px;border-radius:9px;background:rgba(255,255,255,.26);margin-top:10px;overflow:hidden}
 .t-prog i{position:absolute;inset:0;border-radius:inherit;background:#fff;transform-origin:left;transform:scaleX(var(--w,0))}
 .t-pct{position:relative;z-index:2;font-size:.68rem;font-weight:700;margin-top:5px;opacity:.9}
-.enter .t-prog i{animation:xpIn .8s calc(var(--b,0s) + .3s + var(--i)*60ms) cubic-bezier(.2,.8,.2,1) backwards}
+.enter .t-prog i{animation:xpIn 1.2s calc(var(--b,0s) + 1s + var(--i)*90ms) cubic-bezier(.2,.8,.2,1) backwards}
 .ti{display:inline-block}
 
 /* study tools and "did you know" */
@@ -326,7 +326,7 @@ html.vt-theme::view-transition-old(root),html.vt-theme::view-transition-new(root
 .cbar i{position:absolute;inset:0;border-radius:inherit;background:var(--c);transform-origin:left;transform:scaleX(var(--w,0))}
 .cgo{flex:none;padding:.55rem .8rem;font-size:.85rem;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
 .cgo svg{width:14px;height:14px;fill:currentColor}
-.enter .crow .cbar i{animation:xpIn .7s calc(.15s + min(var(--i),10)*30ms) cubic-bezier(.2,.8,.2,1) backwards}
+.enter .crow .cbar i{animation:xpIn 1s calc(.35s + var(--i)*45ms) cubic-bezier(.2,.8,.2,1) backwards}
 .xt{flex:1;min-width:0;line-height:1.15;display:flex;flex-direction:column}
 .xt small{font-size:.7rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--c)}
 .xt span{font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -400,15 +400,15 @@ html.vt-theme::view-transition-old(root),html.vt-theme::view-transition-new(root
 
 /* ----- bottom dock with a sliding highlight ----- */
 .dock{position:fixed;left:50%;bottom:calc(10px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:30;display:grid;grid-auto-flow:column;grid-auto-columns:1fr;width:min(calc(100vw - 20px),440px);padding:6px;border-radius:26px;
-  background:color-mix(in srgb,var(--card) 82%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid color-mix(in srgb,var(--border) 85%,transparent);contain:layout paint;box-shadow:0 18px 40px -16px rgba(20,18,50,.5);}
+  background:color-mix(in srgb,var(--card) 82%,transparent);-webkit-backdrop-filter:blur(16px) saturate(1.5);backdrop-filter:blur(16px) saturate(1.5);border:1px solid color-mix(in srgb,var(--border) 85%,transparent);box-shadow:0 18px 40px -16px rgba(20,18,50,.5);}
 .dock button{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 2px 6px;border-radius:20px;font-size:.64rem;font-weight:800;color:var(--muted);transition:color .3s}
 .dock button svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
 .dock button:not(.on):hover svg{transform:translateY(-2px) rotate(-6deg)}
 .dock .on{color:#fff}.dock .on svg{transform:translateY(-1px) scale(1.1)}
-.dk-ind{position:absolute;z-index:0;top:6px;bottom:6px;left:6px;width:calc((100% - 12px)/var(--nt));border-radius:20px;background:var(--grad);box-shadow:var(--glow);transform:translateX(calc(var(--to)*100%));transition:transform .38s cubic-bezier(.3,1.25,.4,1),opacity .2s}
-.dock.noind .dk-ind{opacity:0}.dock[hidden]{display:none}
+.dk-ind{position:absolute;z-index:0;top:6px;bottom:6px;left:6px;width:calc((100% - 12px)/var(--nt));border-radius:20px;background:var(--grad);box-shadow:var(--glow);transform:translateX(calc(var(--to)*100%))}
 .dk-ind::after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at 50% 0%,rgba(255,255,255,.45),transparent 60%)}
-.dock .pop svg{animation:dkPop .6s cubic-bezier(.3,1.6,.5,1)}
+.dock.mv .dk-ind{animation:slideX .55s cubic-bezier(.3,1.25,.4,1) backwards}
+.dock.mv .on svg{animation:dkPop .6s cubic-bezier(.3,1.6,.5,1)}
 @media(max-width:360px){.dock button{font-size:.58rem;padding:7px 0 6px}.dock button svg{width:20px;height:20px}}
 @media(max-width:350px){.top .back~.brand{display:none}}
 
@@ -423,18 +423,18 @@ html.vt-theme::view-transition-old(root),html.vt-theme::view-transition-new(root
 
 /* ----- entry animations (only when a screen first opens) ----- */
 .boot .logo{animation:spin .9s var(--b,0s) cubic-bezier(.3,1.4,.5,1) backwards}
-.enter .hi-row{animation:rise .4s var(--b,0s) cubic-bezier(.2,1,.3,1) backwards}
-.enter .hero h1 span{animation:rise .45s calc(var(--b,0s) + .04s + var(--w)*45ms) cubic-bezier(.2,1,.3,1) backwards}
-.enter .hero p{animation:rise .4s calc(var(--b,0s) + .16s) cubic-bezier(.2,1,.3,1) backwards}
-.enter .tile{animation:tileIn .5s calc(var(--b,0s) + .08s + var(--i)*45ms) cubic-bezier(.2,1.3,.4,1) backwards}
-.enter .sec-h{animation:rise .4s calc(var(--b,0s) + .1s) cubic-bezier(.2,1,.3,1) backwards}
-.enter .strip>button{animation:rise .4s calc(var(--b,0s) + .18s + var(--i)*40ms) cubic-bezier(.2,1,.3,1) backwards}
-.enter .banner{animation:tileIn .45s cubic-bezier(.2,1.3,.4,1) backwards}
-.enter .crow:not(.rv){animation:rise .35s calc(.04s + min(var(--i),10)*22ms) cubic-bezier(.2,1,.3,1) backwards}
+.enter .hi-row{animation:rise .6s var(--b,0s) cubic-bezier(.2,1,.3,1) backwards}
+.enter .hero h1 span{animation:rise .7s calc(var(--b,0s) + .1s + var(--w)*100ms) cubic-bezier(.2,1,.3,1) backwards}
+.enter .hero p{animation:rise .6s calc(var(--b,0s) + .55s) cubic-bezier(.2,1,.3,1) backwards}
+.enter .tile{animation:tileIn .8s calc(var(--b,0s) + .6s + var(--i)*90ms) cubic-bezier(.2,1.3,.4,1) backwards}
+.enter .sec-h{animation:rise .6s calc(var(--b,0s) + .5s) cubic-bezier(.2,1,.3,1) backwards}
+.enter .strip>button{animation:rise .6s calc(var(--b,0s) + .9s + var(--i)*80ms) cubic-bezier(.2,1,.3,1) backwards}
+.enter .banner{animation:tileIn .7s cubic-bezier(.2,1.3,.4,1) backwards}
+.enter .crow:not(.rv){animation:rise .5s calc(.15s + min(var(--i),14)*40ms) cubic-bezier(.2,1,.3,1) backwards}
 .enter .qcard{animation:rise .5s cubic-bezier(.2,1,.3,1) backwards}
-.dock.boot{animation:dockIn .7s calc(var(--b,0s) + .2s) cubic-bezier(.2,1.2,.3,1) backwards}
+.boot .dock{animation:dockIn .7s calc(var(--b,0s) + .2s) cubic-bezier(.2,1.2,.3,1) backwards}
 .cu{font-weight:800;color:var(--text);font-variant-numeric:tabular-nums}
-.enter .grid.gap-3>:not(.rv){animation:rise .35s calc(var(--i,0)*28ms) cubic-bezier(.2,1,.3,1) backwards}
+.enter .grid.gap-3>:not(.rv){animation:rise .45s calc(var(--i,0)*45ms) cubic-bezier(.2,1,.3,1) backwards}
 .grid.gap-3>:nth-child(2){--i:1}.grid.gap-3>:nth-child(3){--i:2}.grid.gap-3>:nth-child(4){--i:3}.grid.gap-3>:nth-child(5){--i:4}.grid.gap-3>:nth-child(6){--i:5}.grid.gap-3>:nth-child(7){--i:6}.grid.gap-3>:nth-child(n+8){--i:7}
 /* items further down the page fade up as they scroll into view (browsers without scroll timelines just show them) */
 @supports (animation-timeline:view()){
@@ -446,10 +446,10 @@ html.vt-theme::view-transition-old(root),html.vt-theme::view-transition-new(root
 
 /* ----- page transitions ----- */
 /* page entrance: each block of a new screen glides in (from the right going forward, from the left going back) */
-:where(#app.enter>:not(.top):not(.dock):not(.welcome):not(.conf)){animation:pgIn .32s calc(var(--b,0s) + var(--pd,0ms)) cubic-bezier(.2,1,.3,1) backwards}
-:where(#app>:nth-child(3)){--pd:25ms}:where(#app>:nth-child(4)){--pd:50ms}:where(#app>:nth-child(n+5)){--pd:70ms}
-html{--pgx:12px}html[data-dir="back"]{--pgx:-12px}
-@keyframes pgIn{from{opacity:0;transform:translate3d(var(--pgx),6px,0)}}
+:where(#app.enter>:not(.top):not(.dock):not(.welcome):not(.conf)){animation:pgIn .5s calc(var(--b,0s) + var(--pd,0ms)) cubic-bezier(.2,1,.3,1) backwards}
+:where(#app>:nth-child(4)){--pd:50ms}:where(#app>:nth-child(5)){--pd:100ms}:where(#app>:nth-child(6)){--pd:150ms}:where(#app>:nth-child(n+7)){--pd:200ms}
+html{--pgx:16px}html[data-dir="back"]{--pgx:-16px}
+@keyframes pgIn{from{opacity:0;translate:var(--pgx) 8px}}
 
 /* ----- misc ----- */
 html{overscroll-behavior-y:none}body{-webkit-tap-highlight-color:transparent}
@@ -459,7 +459,7 @@ button,a{touch-action:manipulation;-webkit-user-select:none;user-select:none;-we
 .logo svg{width:28px;height:28px}
 
 @keyframes pop{40%{transform:scale(1.07)}}@keyframes rise{from{opacity:0;transform:translateY(18px)}}
-@keyframes tileIn{from{opacity:0;transform:translateY(24px) scale(.92)}}@keyframes float{50%{transform:translateY(-7px) rotate(5deg)}}
+@keyframes tileIn{from{opacity:0;transform:translateY(46px) scale(.8) rotate(-4deg)}}@keyframes float{50%{transform:translateY(-7px) rotate(5deg)}}
 @keyframes spin{from{opacity:0;transform:rotate(-200deg) scale(.2)}}@keyframes dockIn{from{transform:translate(-50%,140%)}}
 @keyframes beat{50%{transform:scale(1.08)}}@keyframes ringIn{from{stroke-dashoffset:100}}
 @keyframes cnt{from{--n:0}}@keyframes fall{to{transform:translateY(105vh) rotate(720deg)}}
@@ -468,7 +468,7 @@ button,a{touch-action:manipulation;-webkit-user-select:none;user-select:none;-we
 @keyframes spinr{to{transform:rotate(360deg)}}
 @keyframes wave{0%,60%,100%{transform:none}10%,30%{transform:rotate(16deg)}20%,40%{transform:rotate(-10deg)}}
 @keyframes cardIn{from{opacity:0;transform:translateY(26px) scale(.94)}}
-@keyframes xpIn{from{transform:scaleX(.001)}to{transform:scaleX(var(--w,0))}}
+@keyframes xpIn{from{transform:scaleX(0)}}
 @keyframes xpFrom{from{transform:scaleX(var(--f,0))}}
 @keyframes progIn{from{transform:scaleX(var(--from))}}
 @keyframes xpShine{0%,55%{transform:translateX(-120%)}100%{transform:translateX(260%)}}
@@ -801,7 +801,7 @@ button,a{touch-action:manipulation;-webkit-user-select:none;user-select:none;-we
 .plevel{margin-top:14px}
 .enter .phead{animation:cardIn .7s cubic-bezier(.2,1.2,.3,1) backwards}
 .enter .plevel{animation:cardIn .7s .15s cubic-bezier(.2,1.2,.3,1) backwards}
-.enter .plevel .xp i{animation:xpIn 1s .25s cubic-bezier(.2,.8,.2,1) backwards}
+.enter .plevel .xp i{animation:xpIn 1.5s .6s cubic-bezier(.2,.8,.2,1) backwards}
 .enter .plevel .elt{animation:eltIn .9s .35s cubic-bezier(.2,1.5,.3,1) backwards}
 .ptiles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 @media(min-width:640px){.ptiles{grid-template-columns:repeat(3,1fr)}}
@@ -832,8 +832,7 @@ button,a{touch-action:manipulation;-webkit-user-select:none;user-select:none;-we
 .dz-btn{background:var(--danger);color:#fff;box-shadow:0 4px 0 color-mix(in srgb,var(--danger) 60%,#000),0 12px 22px -12px var(--danger)}
 .dz-btn:active{transform:translateY(3px);box-shadow:0 1px 0 color-mix(in srgb,var(--danger) 60%,#000)}
 .dz-btn:disabled{opacity:.45;transform:none}
-.legal{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:2px 4px;margin:14px 0 8px;font-size:.85rem;color:var(--muted)}
-.legal a{display:inline-block;padding:10px 8px;min-height:44px;line-height:24px}
+.legal{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 10px;margin:14px 0 4px;font-size:.82rem;color:var(--muted)}
 .dz-list{list-style:disc;padding-left:1.2rem;margin:6px 0 14px;line-height:1.6;font-size:.92rem}
 /* ----- contact ----- */
 .chero{position:relative;overflow:hidden;isolation:isolate;margin:6px 0 16px;padding:30px 22px 28px;border-radius:28px;color:#fff;background:linear-gradient(135deg,#5b4cf5 0%,#8b3ff0 50%,#e8489a 100%);box-shadow:0 18px 34px -18px #7a4df0}
@@ -842,7 +841,7 @@ button,a{touch-action:manipulation;-webkit-user-select:none;user-select:none;-we
 .chero h2 .wv{display:inline-block;transform-origin:70% 80%;animation:wave 2.4s .7s ease-in-out 2}
 .chero p{margin-top:8px;font-weight:600;opacity:.95;max-width:20rem}
 .chero .env{position:absolute;right:22px;top:20px;font-size:2.5rem;z-index:1;animation:float 3.6s ease-in-out infinite}
-.enter .chero{animation:tileIn .45s cubic-bezier(.2,1.3,.4,1) backwards}
+.enter .chero{animation:tileIn .7s cubic-bezier(.2,1.3,.4,1) backwards}
 .enter .cform{animation:rise .6s .2s cubic-bezier(.2,1,.3,1) backwards}
 .cform{padding:18px}.ctopics{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 14px}
 .ctext{min-height:140px;resize:vertical;line-height:1.5;font-weight:500}
@@ -875,7 +874,7 @@ button,a{touch-action:manipulation;-webkit-user-select:none;user-select:none;-we
 <body>
 <div class="cosmos" aria-hidden="true"><canvas id="nebCv"></canvas><canvas id="cosmosCv"></canvas><i class="tw" style="left:12%;top:14%;--d:-1s;--t:4.2s"></i><i class="tw" style="left:78%;top:9%;--d:-2.6s;--t:5.1s"></i><i class="tw" style="left:64%;top:38%;--d:-0.4s;--t:3.8s"></i><i class="tw" style="left:22%;top:56%;--d:-3.1s;--t:4.6s"></i><i class="tw" style="left:88%;top:62%;--d:-1.7s;--t:5.4s"></i><i class="tw" style="left:40%;top:82%;--d:-2.2s;--t:4.1s"></i><i class="tw" style="left:8%;top:90%;--d:-0.9s;--t:4.9s"></i></div>
 <div id="splash"><span class="sl"><svg viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"><ellipse cx="50" cy="50" rx="40" ry="15"/><ellipse cx="50" cy="50" rx="40" ry="15" transform="rotate(60 50 50)"/><ellipse cx="50" cy="50" rx="40" ry="15" transform="rotate(120 50 50)"/></g><circle cx="50" cy="50" r="10" fill="#fff"/><circle cx="50" cy="50" r="5" fill="#7c5cff"/><circle cx="30" cy="15.36" r="7" fill="#3b82ff" stroke="#fff" stroke-width="2.4"/><circle cx="70" cy="15.36" r="7" fill="#ff8a1f" stroke="#fff" stroke-width="2.4"/><circle cx="30" cy="84.64" r="7" fill="#a87bff" stroke="#fff" stroke-width="2.4"/><circle cx="70" cy="84.64" r="7" fill="#1fd88a" stroke="#fff" stroke-width="2.4"/></svg></span><b class="disp">Atomiq</b><span class="tag">PCMB PYQ Arena</span></div>
-<div id="app" class="max-w-5xl mx-auto px-4" style="padding-top: calc(1.25rem + env(safe-area-inset-top,0px));padding-bottom: calc(118px + env(safe-area-inset-bottom,0px));"></div>
+<div id="app" class="max-w-5xl mx-auto px-4 pb-24" style="padding-top: calc(1.25rem + env(safe-area-inset-top,0px));"></div>
 
 <script>
 // ---------------- DATA ----------------
@@ -1766,7 +1765,7 @@ async function finishProfile(){
 async function logout(){
   clearInterval(state.timerHandle);
   state.view = "home"; state.welcomeShown = false; state.g = newGate(); state.avatar = null; state.prof = {scores: null, loading: false}; state.contact = {topic: "Feedback", text: "", sent: false, busy: false};
-  _stIdx = -1;
+  _dockIdx = -1; _stIdx = -1;
   if(state.guest){ state.guest = false; render(); return; }
   try{ await F.au.signOut(F.auth); }catch(e){ state.user = null; state.profile = null; render(); }
 }
@@ -2271,7 +2270,7 @@ async function deleteAccount(){
   state._deleting = false; closeSheet();
   Object.assign(state, {view: "home", welcomeShown: false, adm: {}, g: newGate(), avatar: null, prof: {scores: null, loading: false},
     contact: {topic: "Feedback", text: "", sent: false, busy: false}, seen: {}, game: {me: null, rank: null, champ: false}, user: null, profile: null});
-  _stIdx = -1; render(); window.scrollTo(0, 0);
+  _dockIdx = -1; _stIdx = -1; render(); window.scrollTo(0, 0);
   toast(loginLeft ? "Your data was deleted. Please contact us to finish removing your login." : "Your account and all your data have been deleted.", loginLeft ? "info" : "ok");
 }
 function profileStatsHtml(){
@@ -3385,8 +3384,7 @@ function drawCosmos(){
     g.fillStyle = `rgba(${col},${a})`; g.beginPath(); g.arc(x, y, r, 0, 7); g.fill();
   }
 }
-let _cosRsz, _cosW = innerWidth, _cosH = innerHeight;
-addEventListener("resize", () => { clearTimeout(_cosRsz); _cosRsz = setTimeout(() => { if(innerWidth === _cosW && Math.abs(innerHeight - _cosH) < 160) return; _cosW = innerWidth; _cosH = innerHeight; drawCosmos(); }, 250); });
+let _cosRsz; addEventListener("resize", () => { clearTimeout(_cosRsz); _cosRsz = setTimeout(drawCosmos, 250); });
 
 // ---- numbers that count up when a screen opens ----
 function runCountUps(root, all){
@@ -3398,7 +3396,7 @@ function runCountUps(root, all){
     let shown = -1, lastT = 0;
     const step = now => {
       const k = Math.min(1, Math.max(0, (now - t0) / dur));
-      if(k >= 1 || now - lastT >= 66){ const v = Math.round(to * (1 - Math.pow(1 - k, 3))); if(v !== shown){ shown = v; el.textContent = v + suf; } lastT = now; }
+      if(k >= 1 || now - lastT >= 40){ const v = Math.round(to * (1 - Math.pow(1 - k, 3))); if(v !== shown){ shown = v; el.textContent = v + suf; } lastT = now; }
       if(k < 1 && el.isConnected) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
@@ -3503,12 +3501,11 @@ function paint(){
   root.classList.toggle("gate-on", gate);
   root.classList.toggle("calm", !gate && state.view === "exam");          // pause the background during exams
   syncThemeColor();
-  if(!state._booted){ state._booted=1; app.classList.add("boot"); app.style.setProperty("--b","1.2s"); setTimeout(()=>{ state._booted=2; app.classList.remove("boot"); app.style.removeProperty("--b"); },3200); }
-  state._dockOn = null;
-  if(gate){ state._v = "gate"; state._k = "gate"; app.innerHTML = renderGate(); syncDock(null); drawWelcomeStars(); afterGate(); return; }
+  if(!state._booted){ state._booted=1; app.classList.add("boot"); app.style.setProperty("--b","1.2s"); setTimeout(()=>{ app.classList.remove("boot"); app.style.removeProperty("--b"); },3200); }
+  if(gate){ state._v = "gate"; state._k = "gate"; app.innerHTML = renderGate(); drawWelcomeStars(); afterGate(); return; }
   const key = state.view+"|"+(state.mode||"")+"|"+(state.studySubj||"")+"|"+(state.studyCh||"")+"|"+(state.rxCh||"");
   state._v = state.view;
-  if(state._k!==key){ state._k=key; state._visit=(state._visit||0)+1; app.classList.add("enter"); clearTimeout(state._et); state._et=setTimeout(()=>app.classList.remove("enter"), state._booted === 1 ? 3200 : 1000); }
+  if(state._k!==key){ state._k=key; state._visit=(state._visit||0)+1; app.classList.add("enter"); clearTimeout(state._et); state._et=setTimeout(()=>app.classList.remove("enter"),1800); }
   else app.classList.remove("enter");          // redrawing the same screen (e.g. picking an answer): don't replay its entrance
   if(state.view==="home") app.innerHTML = renderHome();
   else if(state.view==="chapters") app.innerHTML = renderChapters();
@@ -3521,7 +3518,6 @@ function paint(){
   else if(state.view==="study") app.innerHTML = renderStudy();
   else if(state.view==="reactions") app.innerHTML = renderReactions();
   else if(state.view==="welcome"){ if(!app.querySelector(".welcome")){ app.innerHTML = renderWelcome(); drawWelcomeStars(); } }
-  syncDock(state.view === "welcome" ? null : state._dockOn);
   const first = state._cuVisit !== state._visit; state._cuVisit = state._visit;
   runCountUps(app, first);
 }
@@ -3531,57 +3527,30 @@ function nav(view){
   if(!["notes","formulae","reactions"].includes(view)) _stIdx = -1;
   if(view==="notes"||view==="formulae"){ state.mode=view; state.view="study"; state.studyCh=null; state.studyTab=view; }
   else { if(view==="reactions") state.studyTab="reactions"; state.view = view; }
-  if(view==="home") state._back=1; _navTok++;
-  window.scrollTo(0,0); render();
+  if(view==="home") state._back=1; render(); window.scrollTo(0,0);
 }
 
-function goHome(){ clearInterval(state.timerHandle); state.view="home"; state._back=1; _navTok++; window.scrollTo(0,0); render(); }
+function goHome(){ clearInterval(state.timerHandle); state.view="home"; state._back=1; render(); window.scrollTo(0,0); }
 function leaveExam(){ if(confirm('Go back home? This exam will end and your answers will not be saved.')) goHome(); }
 
 function atomSvg(){ return `<svg viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"><ellipse cx="50" cy="50" rx="40" ry="15"/><ellipse cx="50" cy="50" rx="40" ry="15" transform="rotate(60 50 50)"/><ellipse cx="50" cy="50" rx="40" ry="15" transform="rotate(120 50 50)"/></g><circle cx="50" cy="50" r="10" fill="#fff"/><circle cx="50" cy="50" r="5" style="fill:var(--accent)"/><circle cx="30" cy="15.36" r="7" fill="#3b82ff" stroke="#fff" stroke-width="2.4"/><circle cx="70" cy="15.36" r="7" fill="#ff8a1f" stroke="#fff" stroke-width="2.4"/><circle cx="30" cy="84.64" r="7" fill="#a87bff" stroke="#fff" stroke-width="2.4"/><circle cx="70" cy="84.64" r="7" fill="#1fd88a" stroke="#fff" stroke-width="2.4"/></svg>`; }
 function subjColor(s){ return {Physics:"var(--phy)",Chemistry:"var(--che)",Maths:"var(--mat)",Biology:"var(--bio)"}[s]||"var(--accent)"; }
 function conf(){ return `<div class="conf">${Array.from({length:30},(_,k)=>`<i style="--x:${(k*37+11)%100};--d:${(k%8)*.12}s;--k:${["#d94f04","#2f6bff","#078a4f","#7a4df0","#f5b301"][k%5]}"></i>`).join("")}</div>`; }
 
-const DOCK_TABS = [["home","Home"],["study","Study"],["leaderboard","Rankings"],["profile","Profile"],["contact","Contact"]];
-const dockKey = v => ["notes","formulae","reactions"].includes(v) ? "study" : v;
+let _dockIdx = -1;          // last selected dock tab, so the highlight can slide from it
 function header(active){
-  state._dockOn = dockKey(active);          // the tab bar itself lives outside #app (see syncDock)
+  const tabs = [["home","Home"],["study","Study"],["leaderboard","Rankings"],["profile","Profile"],["contact","Contact"]];
+  if(["notes","formulae","reactions"].includes(active)) active = "study";
+  const idx = tabs.findIndex(t => t[0] === active), from = _dockIdx < 0 || _dockIdx >= tabs.length ? idx : _dockIdx, mv = idx >= 0 && from >= 0 && from !== idx;
+  if(idx >= 0) _dockIdx = idx;
   const me = state.profile ? `<button class="arow-me" onclick="nav('profile')" aria-label="Open your profile">${avatarHtml(34)}</button>`
     : state.guest ? `<button class="chip" onclick="logout()">Log in</button>` : "";
   return `<div class="top">
     ${state.view!=="home"?`<button onclick="goHome()" class="back" aria-label="Back to home">${ICONS.back}</button>`:""}
     <span class="logo">${atomSvg()}</span><div class="disp brand">Atomiq</div><span class="tsp"></span>
     <button class="tbtn thm" onclick="toggleTheme(event)" aria-label="${themeNow() === "dark" ? "Switch to light mode" : "Switch to dark mode"}">${ICONS.moon}${ICONS.sun}</button>${me}
-  </div>`;
-}
-// Bottom tab bar: created once, then only the highlight and the active tab change.
-let _dockEl = null, _dockPop = 0;
-function syncDock(active){
-  if(!_dockEl){
-    _dockEl = document.createElement("nav"); _dockEl.className = "dock"; _dockEl.setAttribute("aria-label", "Main");
-    _dockEl.style.setProperty("--nt", DOCK_TABS.length);
-    _dockEl.innerHTML = '<i class="dk-ind" aria-hidden="true"></i>' + DOCK_TABS.map(([v,l]) => `<button type="button" data-v="${v}" onclick="navTab('${v}')">${ICONS[v]}<span>${l}</span></button>`).join("");
-    document.body.appendChild(_dockEl);
-    if(document.getElementById("app").classList.contains("boot")){ _dockEl.classList.add("boot"); _dockEl.style.setProperty("--b", "1.2s"); setTimeout(() => _dockEl && _dockEl.classList.remove("boot"), 3200); }
-  }
-  _dockEl.hidden = !active;
-  if(!active) return;
-  const idx = DOCK_TABS.findIndex(t => t[0] === active);
-  _dockEl.classList.toggle("noind", idx < 0);
-  if(idx >= 0) _dockEl.style.setProperty("--to", idx);
-  _dockEl.querySelectorAll("button").forEach(b => {
-    const on = b.dataset.v === active;
-    if(on !== b.classList.contains("on")){ b.classList.toggle("on", on); if(on){ b.setAttribute("aria-current", "page"); b.classList.add("pop"); clearTimeout(_dockPop); _dockPop = setTimeout(() => b.classList.remove("pop"), 650); } else b.removeAttribute("aria-current"); }
-  });
-}
-// Tapping a tab: move the highlight at once, then draw the new screen on the next frame,
-// so the tap always feels instant even on slow phones.
-let _navTok = 0;
-function navTab(v){
-  if(dockKey(state.view === "study" ? state.mode : state.view) === v && state.view !== "chapters" && !state.studyCh){ window.scrollTo(0, 0); return; }
-  syncDock(v);
-  const tok = ++_navTok;
-  requestAnimationFrame(() => setTimeout(() => { if(tok === _navTok) nav(v); }, 0));
+  </div>
+  <nav class="dock${mv ? " mv" : ""}" style="--nt:${tabs.length};--from:${Math.max(0, from)};--to:${Math.max(0, idx)}">${idx >= 0 ? '<i class="dk-ind" aria-hidden="true"></i>' : ""}${tabs.map(([v,l])=>`<button onclick="nav('${v}')" class="${active===v?'on':''}"${active===v?' aria-current="page"':''}>${ICONS[v]}<span>${l}</span></button>`).join("")}</nav>`;
 }
 
 // Player card on Home: level (an element of the periodic table), XP bar, points, rank.
@@ -3733,13 +3702,12 @@ function renderChatShell(){
 }
 
 document.addEventListener("pointerdown",e=>{
-  const t=e.target.closest(".tile,.btn,.opt,.chip,.pl,.back,.tbtn,.tool,.scard,.pcard"); if(!t) return;
+  const t=e.target.closest(".tile,.btn,.opt,.chip,.pl,.back,.dock button,.tbtn,.tool,.scard,.pcard"); if(!t) return;
   const r=t.getBoundingClientRect(), d=Math.max(r.width,r.height)*2, x=document.createElement("span");
   x.className="rip"; x.style.cssText=`width:${d}px;height:${d}px;left:${e.clientX-r.left-d/2}px;top:${e.clientY-r.top-d/2}px`;
   t.appendChild(x); setTimeout(()=>x.remove(),650);
 });
-let _scd = false;
-addEventListener("scroll", () => { const v = scrollY > 8; if(v !== _scd){ _scd = v; document.documentElement.classList.toggle("scrolled", v); } }, {passive: true});
+addEventListener("scroll", () => document.documentElement.classList.toggle("scrolled", scrollY > 8), {passive: true});
 drawCosmos();
 render();
 bootFirebase();
