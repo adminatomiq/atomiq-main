@@ -1,6 +1,6 @@
 // Atomiq service worker: network first, so students always get the latest version
 // when online, with the last copy kept for offline use. Bump VERSION to clear old caches.
-const VERSION = "atomiq-v1";
+const VERSION = "atomiq-v12";
 const CORE = ["./", "index.html", "manifest.webmanifest", "icon.svg", "icon-192.png", "privacy.html", "terms.html"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(VERSION).then(c => c.addAll(CORE)).catch(() => {})); self.skipWaiting(); });
 self.addEventListener("activate", e => {
